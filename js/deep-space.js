@@ -11,28 +11,28 @@ const MAX_DELTA_TIME = 0.05;
 
 const CONSTELLATIONS = [
   {
-    points: [[0.04, 0.22], [0.23, 0.31], [0.42, 0.27], [0.56, 0.42], [0.72, 0.36], [0.86, 0.48], [0.96, 0.68]],
-    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3]],
+    points: [[0.03, 0.18], [0.2, 0.29], [0.38, 0.24], [0.55, 0.41], [0.71, 0.34], [0.87, 0.5], [0.96, 0.72], [0.62, 0.68]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 3], [3, 7]],
   },
   {
-    points: [[0.03, 0.30], [0.25, 0.64], [0.48, 0.22], [0.72, 0.61], [0.96, 0.27]],
-    edges: [[0, 1], [1, 2], [2, 3], [3, 4]],
+    points: [[0.02, 0.32], [0.22, 0.67], [0.46, 0.2], [0.7, 0.58], [0.96, 0.25], [0.57, 0.82]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [3, 5]],
   },
   {
-    points: [[0.18, 0.06], [0.76, 0.12], [0.35, 0.40], [0.52, 0.43], [0.68, 0.47], [0.16, 0.92], [0.82, 0.94]],
-    edges: [[0, 2], [1, 4], [2, 3], [3, 4], [2, 5], [4, 6], [0, 1]],
+    points: [[0.14, 0.08], [0.78, 0.15], [0.31, 0.39], [0.5, 0.44], [0.69, 0.48], [0.12, 0.94], [0.84, 0.89], [0.58, 0.68]],
+    edges: [[0, 2], [1, 4], [2, 3], [3, 4], [2, 5], [4, 6], [0, 1], [3, 7]],
   },
   {
-    points: [[0.49, 0.02], [0.50, 0.28], [0.51, 0.53], [0.52, 0.96], [0.10, 0.48], [0.90, 0.54]],
-    edges: [[0, 1], [1, 2], [2, 3], [4, 2], [2, 5]],
+    points: [[0.42, 0.02], [0.48, 0.27], [0.54, 0.52], [0.63, 0.96], [0.08, 0.42], [0.91, 0.6], [0.28, 0.73]],
+    edges: [[0, 1], [1, 2], [2, 3], [4, 2], [2, 5], [2, 6]],
   },
   {
-    points: [[0.05, 0.12], [0.22, 0.24], [0.35, 0.44], [0.50, 0.62], [0.68, 0.72], [0.83, 0.65], [0.93, 0.47], [0.98, 0.25]],
-    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7]],
+    points: [[0.04, 0.1], [0.2, 0.23], [0.32, 0.43], [0.48, 0.64], [0.66, 0.76], [0.82, 0.67], [0.94, 0.48], [0.98, 0.23], [0.55, 0.36]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [2, 8]],
   },
   {
-    points: [[0.06, 0.06], [0.38, 0.30], [0.82, 0.25], [0.94, 0.78], [0.45, 0.91]],
-    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 1]],
+    points: [[0.05, 0.08], [0.34, 0.28], [0.79, 0.2], [0.95, 0.73], [0.48, 0.92], [0.18, 0.66]],
+    edges: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 1], [1, 5]],
   },
 ];
 
@@ -180,8 +180,8 @@ function createGalaxyTextures(size, seed, textures) {
         + gasBand * cloudBreaks * 0.09
         + filaments * 0.14
       ) * outerFade * innerFade;
-      const dustCut = dustBand * smoothstep(0.12, 0.35, radius) * outerFade * (0.42 + largeNoise * 0.4);
-      const density = Math.max(0, armDensity * (1 - dustCut * 0.88) + bulge * 0.34 + core * 0.9 + halo) * outerFade;
+      const dustCut = dustBand * smoothstep(0.12, 0.35, radius) * outerFade * (0.48 + largeNoise * 0.46);
+      const density = Math.max(0, armDensity * (1 - dustCut * 0.94) + bulge * 0.3 + core * 0.9 + halo) * outerFade;
 
       const warmWeight = clamp(core * 1.7 + bulge * 0.68);
       const cyanWeight = clamp((gasBand * cloudBreaks + filaments) * outerFade * (0.16 + radius * 0.32));
@@ -210,13 +210,17 @@ function createGalaxyTextures(size, seed, textures) {
 
   const random = createRandom(seed + 913);
   colorContext.globalCompositeOperation = 'screen';
-  for (let i = 0; i < Math.round(size * 0.72); i++) {
-    const radius = Math.pow(random(), 1.35) * size * 0.43;
-    const angle = random() * TAU;
+  for (let i = 0; i < Math.round(size * 1.08); i++) {
+    const normalizedRadius = Math.pow(random(), 0.9) * 0.94;
+    const radius = normalizedRadius * size * 0.46;
+    const arm = i % 4;
+    const angle = random() < 0.18
+      ? random() * TAU
+      : arm * TAU / 4 + normalizedRadius * 5.45 + (random() + random() - 1) * (0.06 + normalizedRadius * 0.13);
     const px = size * 0.5 + Math.cos(angle) * radius;
     const py = size * 0.5 + Math.sin(angle) * radius;
-    const pointSize = 0.35 + random() * 1.1;
-    const opacity = 0.2 + random() * 0.55;
+    const pointSize = 0.28 + random() * 0.82;
+    const opacity = 0.24 + random() * 0.58;
     colorContext.fillStyle = random() < 0.32
       ? `rgba(255,225,174,${opacity})`
       : `rgba(210,235,255,${opacity})`;
@@ -244,19 +248,26 @@ function createNebulaTexture(width, height, seed, palette, textures) {
       const cloud = fbm(nx * 2.7 + warpY * 1.8, ny * 3.9 + warpX * 2.1, seed + 83, 5);
       const detail = fbm(nx * 8.4 - warpX, ny * 7.2 + warpY, seed + 149, 3);
       const ridge = 1 - Math.abs(detail * 2 - 1);
-      const envelope = Math.exp(-(nx * nx * 0.9 + ny * ny * 3.3));
+      const lobeA = Math.exp(-((nx + 0.24) * (nx + 0.24) * 1.65 + (ny - 0.12) * (ny - 0.12) * 4.8));
+      const lobeB = Math.exp(-((nx - 0.36) * (nx - 0.36) * 3.2 + (ny + 0.24) * (ny + 0.24) * 7.5)) * 0.82;
+      const lobeC = Math.exp(-((nx - 0.05) * (nx - 0.05) * 5.2 + (ny - 0.42) * (ny - 0.42) * 10)) * 0.58;
+      const envelope = Math.max(lobeA, lobeB, lobeC);
       const edgeMaskX = 1 - smoothstep(0.72, 0.99, Math.abs(nx));
       const edgeMaskY = 1 - smoothstep(0.7, 0.98, Math.abs(ny));
-      const brokenCloud = smoothstep(0.48, 0.76, cloud * 0.78 + ridge * 0.34);
-      const filaments = smoothstep(0.66, 0.92, ridge * cloud) * 0.5;
-      const alpha = clamp((brokenCloud * 0.72 + filaments) * envelope * edgeMaskX * edgeMaskY * palette.opacity);
+      const polarRadius = Math.sqrt(nx * nx + ny * ny);
+      const curl = 0.68 + Math.sin(Math.atan2(ny, nx) * 2.4 + polarRadius * 7.2 + detail * 3.4) * 0.32;
+      const cloudGaps = smoothstep(0.43, 0.69, cloud * 0.7 + detail * 0.3);
+      const brokenCloud = smoothstep(0.5, 0.77, cloud * 0.7 + ridge * 0.38) * cloudGaps;
+      const filaments = smoothstep(0.64, 0.91, ridge * cloud) * (0.32 + curl * 0.32);
+      const alpha = clamp((brokenCloud * 0.68 + filaments) * envelope * curl * edgeMaskX * edgeMaskY * palette.opacity);
       const colorMix = clamp(cloud * 0.7 + detail * 0.3);
       const accentMix = clamp((ridge - 0.62) * 1.8);
+      const highlightMix = smoothstep(0.76, 0.94, detail) * brokenCloud * 0.12;
       const index = (y * width + x) * 4;
 
-      data[index] = palette.low[0] + (palette.high[0] - palette.low[0]) * colorMix + palette.accent[0] * accentMix * 0.22;
-      data[index + 1] = palette.low[1] + (palette.high[1] - palette.low[1]) * colorMix + palette.accent[1] * accentMix * 0.22;
-      data[index + 2] = palette.low[2] + (palette.high[2] - palette.low[2]) * colorMix + palette.accent[2] * accentMix * 0.22;
+      data[index] = palette.low[0] + (palette.high[0] - palette.low[0]) * colorMix + palette.accent[0] * accentMix * 0.18 + palette.highlight[0] * highlightMix;
+      data[index + 1] = palette.low[1] + (palette.high[1] - palette.low[1]) * colorMix + palette.accent[1] * accentMix * 0.18 + palette.highlight[1] * highlightMix;
+      data[index + 2] = palette.low[2] + (palette.high[2] - palette.low[2]) * colorMix + palette.accent[2] * accentMix * 0.18 + palette.highlight[2] * highlightMix;
       data[index + 3] = alpha * 255;
     }
   }
@@ -279,10 +290,11 @@ function createPlanetTextures(size, seed, palette, textures) {
       const u = x / (size * 2 - 1);
       const broad = fbm(u * 5.2, v * 7.4, seed, 5);
       const detail = fbm(u * 17.3, v * 20.1, seed + 59, 3);
+      const microDetail = fbm(u * 31.2, v * 28.4, seed + 113, 3);
       const bands = Math.sin((v + broad * 0.12) * Math.PI * palette.bands) * 0.5 + 0.5;
-      const mix = clamp(broad * 0.62 + detail * 0.2 + bands * 0.18);
+      const mix = clamp(broad * 0.57 + detail * 0.2 + bands * 0.15 + microDetail * 0.08);
       const index = (y * size * 2 + x) * 4;
-      const elevation = clamp(broad * 0.72 + detail * 0.28);
+      const elevation = clamp(broad * 0.62 + detail * 0.25 + microDetail * 0.13);
       colorImage.data[index] = palette.dark[0] + (palette.light[0] - palette.dark[0]) * mix;
       colorImage.data[index + 1] = palette.dark[1] + (palette.light[1] - palette.dark[1]) * mix;
       colorImage.data[index + 2] = palette.dark[2] + (palette.light[2] - palette.dark[2]) * mix;
@@ -423,7 +435,7 @@ export function createBackground() {
   const starTexture = createStarTexture(textures);
 
   // Far, middle and near star fields use normalized screen-space geometry.
-  function createStarLayer(count, depth, sizeRange, opacity, renderOrder) {
+  function createStarLayer(count, depth, sizeRange, opacity, renderOrder, region = 'full') {
     const positions = [];
     const colors = [];
     const sizes = [];
@@ -432,17 +444,24 @@ export function createBackground() {
     for (let i = 0; i < count; i++) {
       let x = random() - 0.5;
       let y = random() - 0.5;
-      if (random() < 0.26) {
+      if (region === 'lower') {
+        x *= 0.88;
+        y = -0.16 - random() * 0.32;
+      } else if (random() < 0.3) {
         const angle = random() * TAU;
         const radius = 0.08 + Math.sqrt(random()) * 0.44;
         x = Math.cos(angle) * radius;
         y = Math.sin(angle) * radius * 0.68 + 0.1;
       }
+      if (Math.abs(x) > 0.4 && Math.abs(y) > 0.38) {
+        x *= 0.86;
+        y *= 0.86;
+      }
       positions.push(x, y, (random() - 0.5) * 0.18);
       const colorChance = random();
-      if (colorChance < 0.7) colors.push(0.88, 0.94, 1);
-      else if (colorChance < 0.94) colors.push(0.56, 0.78, 1);
-      else if (colorChance < 0.985) colors.push(1, 0.83, 0.65);
+      if (colorChance < 0.72) colors.push(0.9, 0.96, 1);
+      else if (colorChance < 0.96) colors.push(0.58, 0.8, 1);
+      else if (colorChance < 0.99) colors.push(1, 0.85, 0.68);
       else colors.push(0.35, 0.9, 0.68);
       sizes.push(sizeRange[0] + random() * (sizeRange[1] - sizeRange[0]));
       phases.push(random() * TAU);
@@ -463,6 +482,7 @@ export function createBackground() {
   const farStars = createStarLayer(isMobile ? 720 : isTablet ? 1500 : 2400, -6, [0.6, 1.4], 0.46, 10);
   const midStars = createStarLayer(isMobile ? 260 : isTablet ? 470 : 720, -2, [0.85, 2.1], 0.68, 50);
   const nearStars = createStarLayer(isMobile ? 34 : 92, 0.3, [1.25, 3.1], 0.78, 90);
+  const lowerStars = createStarLayer(isMobile ? 70 : isTablet ? 130 : 190, -1.4, [0.45, 1.05], 0.3, 49, 'lower');
 
   // A few near-star glints are sprites, never large blurred particles.
   const glintTexture = createRadialTexture([
@@ -473,7 +493,7 @@ export function createBackground() {
     [1, 'rgba(20,80,150,0)'],
   ], textures, 128);
   const glints = [];
-  const glintCount = isMobile ? 3 : 8;
+  const glintCount = isMobile ? 4 : 10;
   for (let i = 0; i < glintCount; i++) {
     const material = trackMaterial(new THREE.SpriteMaterial({
       map: glintTexture,
@@ -503,16 +523,16 @@ export function createBackground() {
   const nebulaResolution = isMobile ? [320, 144] : [512, 224];
   const nebulaDefinitions = [
     {
-      nx: 0.08, ny: 0.26, width: 0.52, height: 0.3, rotation: -0.12, phase: 0.2,
-      palette: { low: [8, 20, 48], high: [38, 116, 178], accent: [80, 220, 235], opacity: 0.62 },
+      nx: 0.07, ny: 0.28, width: 0.43, height: 0.34, rotation: -0.27, phase: 0.2,
+      palette: { low: [8, 20, 48], high: [38, 116, 178], accent: [80, 220, 235], highlight: [230, 184, 126], opacity: 0.6 },
     },
     {
-      nx: 0.91, ny: 0.3, width: 0.5, height: 0.28, rotation: 0.18, phase: 2.1,
-      palette: { low: [7, 25, 50], high: [22, 126, 150], accent: [66, 210, 165], opacity: 0.55 },
+      nx: 0.93, ny: 0.35, width: 0.4, height: 0.33, rotation: 0.31, phase: 2.1,
+      palette: { low: [7, 25, 50], high: [22, 116, 146], accent: [58, 181, 151], highlight: [110, 78, 150], opacity: 0.52 },
     },
     {
-      nx: 0.13, ny: 0.74, width: 0.42, height: 0.22, rotation: 0.13, phase: 4.2,
-      palette: { low: [12, 17, 48], high: [52, 86, 154], accent: [118, 68, 150], opacity: 0.42 },
+      nx: 0.16, ny: 0.76, width: 0.35, height: 0.26, rotation: -0.18, phase: 4.2,
+      palette: { low: [12, 17, 48], high: [45, 79, 142], accent: [104, 65, 140], highlight: [220, 172, 112], opacity: 0.38 },
     },
   ];
   const nebulae = [];
@@ -643,11 +663,11 @@ export function createBackground() {
       if (i < coreEnd && colorChance < 0.52) colors.push(1, 0.82, 0.55);
       else if (colorChance < 0.58) colors.push(0.86, 0.94, 1);
       else if (colorChance < 0.86) colors.push(0.52, 0.79, 1);
-      else if (colorChance < 0.97) colors.push(0.28, 0.82, 0.93);
+      else if (colorChance < 0.98) colors.push(0.28, 0.82, 0.93);
       else colors.push(0.25, 0.82, 0.58);
 
-      const largePoint = random() < 0.035;
-      sizes.push((largePoint ? 1.9 + random() * 1.35 : 0.68 + random() * 1.08) * opacityScale);
+      const largePoint = random() < 0.025;
+      sizes.push((largePoint ? 1.75 + random() * 1.2 : 0.52 + random() * 0.88) * opacityScale);
       phases.push(random() * TAU);
       speeds.push(0.16 + random() * 0.52);
     }
@@ -668,11 +688,11 @@ export function createBackground() {
     return points;
   }
 
-  const galaxyPointCount = isMobile ? 3000 : isTablet ? 6800 : 9200;
+  const galaxyPointCount = isMobile ? 3400 : isTablet ? 7600 : 10800;
   const galaxyPoints = createGalaxyPoints(galaxyPointCount);
 
   // Fine dust around the galactic plane adds depth without reading as snow.
-  const cosmicDustCount = isMobile ? 260 : 850;
+  const cosmicDustCount = isMobile ? 360 : 1050;
   const dustPositions = [];
   const dustColors = [];
   const dustSizes = [];
@@ -683,7 +703,7 @@ export function createBackground() {
     const angle = random() * TAU;
     dustPositions.push(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.67, (random() - 0.5) * 0.12);
     dustColors.push(0.28, 0.5 + random() * 0.18, 0.72 + random() * 0.18);
-    dustSizes.push(0.35 + random() * 0.55);
+    dustSizes.push(0.28 + random() * 0.52);
     dustPhases.push(random() * TAU);
     dustSpeeds.push(0.08 + random() * 0.2);
   }
@@ -691,7 +711,7 @@ export function createBackground() {
   setPointAttributes(cosmicDustGeometry, dustPositions, dustColors, dustSizes, dustPhases, dustSpeeds);
   const cosmicDustMaterial = trackMaterial(createPointMaterial(textures, {
     texture: starTexture,
-    opacity: 0.24,
+    opacity: 0.3,
     blending: THREE.AdditiveBlending,
   }));
   animatedPointMaterials.push(cosmicDustMaterial);
@@ -703,10 +723,10 @@ export function createBackground() {
 
   // The nucleus is built from independent white, ivory and cyan light layers.
   const coreLayers = [
-    { size: 0.32, color: 0xffffff, opacity: 0.78, texture: createRadialTexture([[0, 'rgba(255,255,255,1)'], [0.14, 'rgba(255,255,250,0.92)'], [0.5, 'rgba(255,244,215,0.2)'], [1, 'rgba(255,240,210,0)']], textures) },
-    { size: 0.78, color: 0xffdca2, opacity: 0.5, texture: createRadialTexture([[0, 'rgba(255,250,225,0.9)'], [0.28, 'rgba(255,218,158,0.48)'], [0.72, 'rgba(240,190,110,0.08)'], [1, 'rgba(220,160,80,0)']], textures) },
-    { size: 1.15, color: 0xc9e5ff, opacity: 0.22, texture: createRadialTexture([[0, 'rgba(220,240,255,0.65)'], [0.3, 'rgba(150,210,255,0.25)'], [0.72, 'rgba(65,180,220,0.06)'], [1, 'rgba(30,120,180,0)']], textures) },
-    { size: 1.55, color: 0x53d5c0, opacity: 0.075, texture: createRadialTexture([[0, 'rgba(90,220,210,0.22)'], [0.46, 'rgba(40,175,175,0.08)'], [1, 'rgba(20,110,130,0)']], textures) },
+    { size: 0.24, color: 0xffffff, opacity: 0.82, texture: createRadialTexture([[0, 'rgba(255,255,255,1)'], [0.14, 'rgba(255,255,250,0.92)'], [0.5, 'rgba(255,244,215,0.2)'], [1, 'rgba(255,240,210,0)']], textures) },
+    { size: 0.62, color: 0xffdca2, opacity: 0.48, texture: createRadialTexture([[0, 'rgba(255,250,225,0.9)'], [0.28, 'rgba(255,218,158,0.48)'], [0.72, 'rgba(240,190,110,0.08)'], [1, 'rgba(220,160,80,0)']], textures) },
+    { size: 1, color: 0xc9e5ff, opacity: 0.2, texture: createRadialTexture([[0, 'rgba(220,240,255,0.65)'], [0.3, 'rgba(150,210,255,0.25)'], [0.72, 'rgba(65,180,220,0.06)'], [1, 'rgba(30,120,180,0)']], textures) },
+    { size: 1.34, color: 0x53d5c0, opacity: 0.06, texture: createRadialTexture([[0, 'rgba(90,220,210,0.22)'], [0.46, 'rgba(40,175,175,0.08)'], [1, 'rgba(20,110,130,0)']], textures) },
   ];
   const coreSprites = [];
   for (let i = 0; i < coreLayers.length; i++) {
@@ -792,11 +812,11 @@ export function createBackground() {
   }
 
   // Real lit planet meshes with procedural color and bump textures.
-  scene.add(new THREE.HemisphereLight(0x8dcaff, 0x02050a, 0.38));
-  const keyLight = new THREE.DirectionalLight(0xdaf2ff, 2.3);
+  scene.add(new THREE.HemisphereLight(0x8dcaff, 0x02050a, 0.24));
+  const keyLight = new THREE.DirectionalLight(0xdaf2ff, 2.65);
   keyLight.position.set(-4, 4, 6);
   scene.add(keyLight);
-  const warmLight = new THREE.PointLight(0xffd59a, 1.5, 12, 2);
+  const warmLight = new THREE.PointLight(0xffd59a, 1.05, 12, 2);
   warmLight.position.set(0, 0.5, 2.5);
   scene.add(warmLight);
 
@@ -804,11 +824,11 @@ export function createBackground() {
     {
       nx: isMobile ? 0.83 : 0.88, ny: isMobile ? 0.21 : 0.27, radiusPx: isMobile ? 11 : 20,
       period: 168, phase: 0.6, orbitX: 8, orbitY: 5, ring: true,
-      palette: { dark: [18, 31, 48], light: [72, 124, 155], bands: 7 },
+      palette: { dark: [17, 27, 40], light: [72, 102, 119], bands: 7 },
     },
     {
       nx: 0.12, ny: 0.68, radiusPx: 15, period: 214, phase: 2.4, orbitX: 6, orbitY: 7, ring: false,
-      palette: { dark: [17, 34, 37], light: [60, 112, 109], bands: 5 },
+      palette: { dark: [18, 29, 34], light: [66, 96, 94], bands: 5 },
     },
   ];
   const planets = [];
@@ -823,44 +843,67 @@ export function createBackground() {
     const material = trackMaterial(new THREE.MeshStandardMaterial({
       map: planetTextures.color,
       bumpMap: planetTextures.bump,
-      bumpScale: 0.055,
-      roughness: 0.88,
+      bumpScale: 0.07,
+      roughness: 0.92,
       metalness: 0.03,
-      color: i === 0 ? 0xb7d6e5 : 0x9fc9bf,
+      color: i === 0 ? 0xa7bac4 : 0x9aafa9,
       emissive: i === 0 ? 0x071522 : 0x061713,
-      emissiveIntensity: 0.18,
+      emissiveIntensity: 0.08,
     }));
     const sphere = new THREE.Mesh(geometry, material);
     sphere.renderOrder = 72;
     group.add(sphere);
 
-    const atmosphereMaterial = trackMaterial(new THREE.MeshBasicMaterial({
-      color: i === 0 ? 0x73d5ef : 0x5ad6b0,
+    const atmosphereMaterial = trackMaterial(new THREE.ShaderMaterial({
+      uniforms: {
+        uColor: { value: new THREE.Color(i === 0 ? 0x83c5d9 : 0x73b8a8) },
+        uOpacity: { value: 0.22 },
+      },
+      vertexShader: `
+        varying vec3 vNormal;
+        varying vec3 vViewDirection;
+        void main() {
+          vec4 viewPosition = modelViewMatrix * vec4(position, 1.0);
+          vNormal = normalize(normalMatrix * normal);
+          vViewDirection = normalize(-viewPosition.xyz);
+          gl_Position = projectionMatrix * viewPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 uColor;
+        uniform float uOpacity;
+        varying vec3 vNormal;
+        varying vec3 vViewDirection;
+        void main() {
+          float fresnel = pow(1.0 - max(dot(vNormal, vViewDirection), 0.0), 3.2);
+          gl_FragColor = vec4(uColor, fresnel * uOpacity);
+        }
+      `,
       transparent: true,
-      opacity: 0.12,
       blending: THREE.AdditiveBlending,
-      side: THREE.BackSide,
+      side: THREE.FrontSide,
+      depthTest: true,
       depthWrite: false,
       toneMapped: false,
     }));
     const atmosphere = new THREE.Mesh(geometry, atmosphereMaterial);
-    atmosphere.scale.setScalar(1.08);
+    atmosphere.scale.setScalar(1.055);
     atmosphere.renderOrder = 71;
     group.add(atmosphere);
 
     if (definition.ring) {
-      const ringGeometry = trackGeometry(new THREE.RingGeometry(1.42, 2.05, 72));
+      const ringGeometry = trackGeometry(new THREE.RingGeometry(1.5, 1.88, 72));
       const ringMaterial = trackMaterial(new THREE.MeshBasicMaterial({
-        color: 0x8fc6d5,
+        color: 0x9abac0,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.13,
         side: THREE.DoubleSide,
         depthWrite: false,
         toneMapped: false,
       }));
       const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-      ring.rotation.x = 1.18;
-      ring.rotation.z = -0.28;
+      ring.rotation.x = 1.27;
+      ring.rotation.z = -0.36;
       ring.renderOrder = 70;
       group.add(ring);
     }
@@ -969,6 +1012,8 @@ export function createBackground() {
     midStars.scale.set(midView.width, midView.height, 1);
     const nearView = viewSizeAtZ(nearStars.position.z);
     nearStars.scale.set(nearView.width, nearView.height, 1);
+    const lowerView = viewSizeAtZ(lowerStars.position.z);
+    lowerStars.scale.set(lowerView.width, lowerView.height, 1);
 
     for (let i = 0; i < nebulae.length; i++) {
       const nebula = nebulae[i];
