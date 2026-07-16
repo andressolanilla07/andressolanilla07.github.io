@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Responsive — Media Query Overrides
+   Mobile-first: base styles are mobile, overrides for larger screens.
+   Breakpoints: 320px (xs), 640px (sm), 768px (md), 1024px (lg), 1280px (xl), 1536px (2xl)
+   ========================================================================== */
+
+/* ── xs: max 374px (Small Phones) ─────────────────────────────────────────── */
+
+@media (max-width: 374px) {
+  .hero__name {
+    font-size: clamp(1.5rem, 1.25rem + 2vw, 1.75rem);
+  }
+
+  .hero__content {
+    gap: var(--space-3);
+  }
+
+  .hero__avatar-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hero__scroll {
+    bottom: var(--space-4);
+  }
+
+  .mobile-menu__link {
+    font-size: clamp(1.5rem, 1.25rem + 1.5vw, 1.75rem);
+  }
+
+  .skill-item {
+    padding: var(--space-3) var(--space-3);
+  }
+
+  .card {
+    padding: var(--space-4);
+  }
+}
+
+/* ── sm: 640px+ (Mobile Landscape) ────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .hero__avatar-wrapper {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero__cta {
+    flex-direction: row;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .hero__scroll {
+    bottom: var(--space-8);
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* ── md: 768px+ (Tablet) ─────────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  .section {
+    padding-block: var(--space-20);
+  }
+
+  .hero__avatar-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .mobile-menu__link {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  }
+}
+
+/* ── lg: 1024px+ (Desktop) ────────────────────────────────────────────────── */
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-24);
+  }
+
+  .navbar__links {
+    display: flex;
+  }
+
+  .navbar__cta {
+    display: inline-flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .hero__avatar-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .projects__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer__inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* ── xl: 1280px+ (Large Desktop) ──────────────────────────────────────────── */
+
+@media (min-width: 1280px) {
+  .section {
+    padding-block: var(--space-28);
+  }
+
+  .section__header {
+    margin-bottom: var(--space-16);
+  }
+}
+
+/* ── 2xl: 1536px+ (Ultra Wide) ───────────────────────────────────────────── */
+
+@media (min-width: 1536px) {
+  .section {
+    padding-block: var(--space-32);
+  }
+}
+
+/* ── Touch devices: hide custom cursor ────────────────────────────────────── */
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}

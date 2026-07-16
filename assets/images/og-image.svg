@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#00CC6D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="rgba(0,255,136,0.08)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#050505"/>
+
+  <!-- Subtle gradient glow -->
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Accent line -->
+  <rect x="100" y="280" width="60" height="3" rx="1.5" fill="url(#accent)"/>
+
+  <!-- Name -->
+  <text x="100" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700" fill="#F0F0F2" letter-spacing="-0.03em">Andrés Mauricio</text>
+
+  <!-- Title -->
+  <text x="100" y="375" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#8A8A8E">Software Engineer &amp; Developer</text>
+
+  <!-- URL -->
+  <text x="100" y="560" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="400" fill="#6A6A6E">andres.dev</text>
+
+  <!-- Decorative dots -->
+  <circle cx="1100" cy="100" r="2" fill="#00FF88" opacity="0.3"/>
+  <circle cx="1050" cy="150" r="1.5" fill="#00FF88" opacity="0.2"/>
+  <circle cx="1120" cy="180" r="1" fill="#00FF88" opacity="0.15"/>
+  <circle cx="1080" cy="80" r="1" fill="#00FF88" opacity="0.25"/>
+</svg>

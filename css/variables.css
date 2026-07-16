@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Design Tokens — CSS Custom Properties
+   All colors, spacing, typography, and reusable values.
+   ========================================================================== */
+
+:root {
+  /* ── Backgrounds ────────────────────────────────────────────────────────── */
+  --bg-void:       #050505;
+  --bg-primary:    #070707;
+  --bg-elevated:   #0C0C0E;
+  --bg-surface:    #141416;
+
+  /* ── Text ───────────────────────────────────────────────────────────────── */
+  --text-primary:   #F0F0F2;
+  --text-secondary: #8A8A8E;
+  --text-tertiary:  #7A7A7E;  /* WCAG AA 5.5:1 on #050505 background */
+  --text-disabled:  #2A2A2E;
+
+  /* ── Emerald Accent Scale ───────────────────────────────────────────────── */
+  --emerald-300: #33FFA5;
+  --emerald-400: #00FF88;
+  --emerald-600: #00CC6D;
+
+  /* ── Borders ────────────────────────────────────────────────────────────── */
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-default:  rgba(255, 255, 255, 0.10);
+  --border-accent:   rgba(0, 255, 136, 0.25);
+
+  /* ── Gradients ──────────────────────────────────────────────────────────── */
+  --gradient-hero:       radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 255, 136, 0.07) 0%, transparent 70%);
+  --gradient-text:       linear-gradient(135deg, #00FF88 0%, #00CC6D 40%, #33FFA5 70%, #00FF88 100%);
+  --gradient-card-border: linear-gradient(180deg, rgba(0, 255, 136, 0.18), rgba(0, 255, 136, 0.01));
+  --gradient-button:     linear-gradient(135deg, #00FF88, #00CC6D);
+  --gradient-button-hover: linear-gradient(135deg, #33FFA5, #00FF88);
+
+  /* ── Shadows ────────────────────────────────────────────────────────────── */
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg:   0 8px 40px rgba(0, 0, 0, 0.55);
+
+  /* ── Glow Shadows ───────────────────────────────────────────────────────── */
+  --glow-sm:   0 0 12px rgba(0, 255, 136, 0.10);
+  --glow-md:   0 0 24px rgba(0, 255, 136, 0.15);
+  --glow-lg:   0 0 48px rgba(0, 255, 136, 0.20);
+
+  /* ── Typography: Font Families ──────────────────────────────────────────── */
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Typography: Sizes (Fluid) ──────────────────────────────────────────── */
+  --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.83rem + 0.2vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
+  --text-lg:   clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  --text-xl:   clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-3xl:  clamp(1.75rem, 1.5rem + 1.8vw, 3rem);
+  --text-hero: clamp(1.75rem, 1.25rem + 2.5vw, 3.75rem);
+
+  /* ── Typography: Weights ────────────────────────────────────────────────── */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* ── Typography: Line Heights ───────────────────────────────────────────── */
+  --leading-none:    1.0;
+  --leading-tight:   1.2;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.75;
+
+  /* ── Typography: Letter Spacing ─────────────────────────────────────────── */
+  --tracking-tighter: -0.03em;
+  --tracking-tight:   -0.02em;
+  --tracking-wide:    0.05em;
+  --tracking-wider:   0.12em;
+
+  /* ── Spacing Scale (4px base) ───────────────────────────────────────────── */
+  --space-0:   0;
+  --space-1:   0.25rem;
+  --space-1-5: 0.375rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.25rem;
+  --space-6:   1.5rem;
+  --space-8:   2rem;
+  --space-10:  2.5rem;
+  --space-12:  3rem;
+  --space-16:  4rem;
+  --space-20:  5rem;
+  --space-24:  6rem;
+  --space-32:  8rem;
+
+  /* ── Border Radius ──────────────────────────────────────────────────────── */
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-full:  9999px;
+
+  /* ── Z-Index Scale ──────────────────────────────────────────────────────── */
+  --z-content:  1;
+  --z-nav:      100;
+  --z-overlay:  200;
+  --z-modal:    300;
+  --z-cursor:   400;
+
+  /* ── Layout ─────────────────────────────────────────────────────────────── */
+  --container-max:  1120px;
+  --container-wide: 1280px;
+  --navbar-height:  64px;
+
+  /* ── Transitions ────────────────────────────────────────────────────────── */
+  --ease-default:  cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-fast:    150ms;
+  --duration-normal:  250ms;
+  --duration-slow:    400ms;
+  --duration-slower:  600ms;
+}

@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Sections — About, Projects, Skills, Contact, Footer
+   Section-specific styles beyond the shared layout system.
+   ========================================================================== */
+
+/* ── About ────────────────────────────────────────────────────────────────── */
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+  align-items: start;
+}
+
+.about__text p {
+  margin-bottom: var(--space-4);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.about__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* ── Projects ─────────────────────────────────────────────────────────────── */
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.project-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+  background: var(--bg-elevated);
+}
+
+.project-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.project-card__description {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-4);
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.project-card__link:hover,
+.project-card__link:focus-visible {
+  color: var(--emerald-400);
+}
+
+.project-card__link:focus-visible {
+  outline: 2px solid var(--emerald-400);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.project-card__link--demo {
+  color: var(--emerald-400);
+}
+
+/* ── Skills ───────────────────────────────────────────────────────────────── */
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: all var(--duration-slow) var(--ease-out);
+  background: rgba(12, 12, 14, 0.3);
+}
+
+.skill-item__icon {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(1) opacity(0.5);
+  transition: filter var(--duration-slow) var(--ease-out);
+}
+
+.skill-item:hover,
+.skill-item:focus-visible {
+  background: rgba(0, 255, 136, 0.03);
+  border-color: var(--border-accent);
+  box-shadow: var(--glow-sm);
+  transform: translateY(-2px);
+}
+
+.skill-item:hover .skill-item__icon,
+.skill-item:focus-visible .skill-item__icon {
+  filter: grayscale(0) opacity(1);
+}
+
+.skill-item:focus-visible {
+  outline: 2px solid var(--emerald-400);
+  outline-offset: 2px;
+}
+
+.skill-item__name {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.skill-item--featured {
+  border-color: rgba(0, 255, 136, 0.15);
+  background: rgba(0, 255, 136, 0.03);
+}
+
+.skill-item--featured .skill-item__name {
+  color: var(--emerald-400);
+  font-weight: var(--weight-semibold);
+}
+
+.skill-item--featured:hover {
+  border-color: rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.08), var(--glow-sm);
+}
+
+/* ── Contact ──────────────────────────────────────────────────────────────── */
+
+.contact {
+  text-align: center;
+}
+
+.contact__title {
+  margin-bottom: var(--space-4);
+}
+
+.contact__description {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: min(480px, 90%);
+  margin-inline: auto;
+  margin-bottom: var(--space-8);
+  line-height: var(--leading-normal);
+}
+
+.contact__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.contact__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+.contact__social-link:hover,
+.contact__social-link:focus-visible {
+  color: var(--emerald-400);
+  border-color: var(--border-accent);
+  background: rgba(0, 255, 136, 0.04);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-sm);
+}
+
+.contact__social-link:focus-visible {
+  outline: 2px solid var(--emerald-400);
+  outline-offset: 2px;
+}
+
+.contact__social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────── */
+
+.footer {
+  border-top: 1px solid var(--border-subtle);
+  padding: var(--space-8) clamp(1rem, 0.5rem + 2.5vw, 2rem);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.footer__text {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.footer__back-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-tertiary);
+  transition: all var(--duration-normal) var(--ease-default);
+}
+
+.footer__back-to-top:hover,
+.footer__back-to-top:focus-visible {
+  border-color: var(--border-accent);
+  color: var(--emerald-400);
+  background: rgba(0, 255, 136, 0.04);
+}
+
+.footer__back-to-top:focus-visible {
+  outline: 2px solid var(--emerald-400);
+  outline-offset: 2px;
+}
+
+.footer__back-to-top svg {
+  width: 16px;
+  height: 16px;
+}
