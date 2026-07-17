@@ -1,0 +1,208 @@
+.eyebrow {
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-small);
+  padding: 0.72rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.button--primary {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.button--secondary {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.text-link {
+  color: var(--color-accent-hover);
+  font-weight: 650;
+}
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.site-header__inner {
+  display: flex;
+  min-height: 4.75rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.brand {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.brand__mark {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-small);
+  background: var(--color-surface);
+  color: var(--color-accent-hover);
+}
+
+.site-nav,
+.site-nav__list {
+  display: flex;
+  align-items: center;
+}
+
+.site-nav {
+  gap: var(--space-2);
+}
+
+.site-nav__list {
+  gap: 0.15rem;
+  list-style: none;
+}
+
+.site-nav__link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border-radius: var(--radius-small);
+  padding: 0.5rem 0.58rem;
+  color: var(--color-text-secondary);
+  font-size: clamp(0.76rem, 0.8vw, 0.88rem);
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.site-nav__link[aria-current="page"] {
+  background: var(--color-accent-subtle);
+  color: var(--color-accent-hover);
+  font-weight: 700;
+}
+
+.nav-toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-small);
+  background: transparent;
+  color: var(--color-text);
+}
+
+.card,
+.project-card,
+.experience-entry,
+.technology-group,
+.education-entry,
+.contact-link {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.profile-frame {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-medium);
+  background: var(--color-surface);
+  box-shadow: 0 12px 30px var(--color-shadow);
+}
+
+.profile-frame--about {
+  aspect-ratio: 1;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% center;
+}
+
+.hero__media.profile-frame {
+  width: min(100%, clamp(16.25rem, 75vw, 20rem));
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 12px 28px rgba(17, 20, 17, 0.08);
+}
+
+.hero__media .profile-image {
+  object-position: center;
+}
+
+@media (min-width: 48rem) {
+  .hero__media.profile-frame {
+    width: min(100%, clamp(22.5rem, 40vw, 26.25rem));
+  }
+}
+
+@media (min-width: 64rem) {
+  .hero__media.profile-frame {
+    width: min(100%, clamp(27.5rem, 34vw, 32.5rem));
+  }
+}
+
+.tag-list,
+.footer-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  list-style: none;
+}
+
+.tag {
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-6);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.site-footer__identity span,
+.site-footer__note {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: Replace with the final public URL before deployment.
+Sitemap: https://example.com/sitemap.xml

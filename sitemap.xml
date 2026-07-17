@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- TODO: Replace example.com with the final GitHub Pages or custom-domain URL. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/</loc></url>
+  <url><loc>https://example.com/about.html</loc></url>
+  <url><loc>https://example.com/projects.html</loc></url>
+  <url><loc>https://example.com/experience.html</loc></url>
+  <url><loc>https://example.com/skills.html</loc></url>
+  <url><loc>https://example.com/education.html</loc></url>
+  <url><loc>https://example.com/contact.html</loc></url>
+</urlset>

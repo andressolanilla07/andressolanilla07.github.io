@@ -1,0 +1,44 @@
+.container {
+  width: min(100% - 2.5rem, var(--container-width));
+  margin-inline: auto;
+}
+
+.page-main {
+  padding-top: clamp(7.5rem, 11vw, 9.5rem);
+}
+
+.section {
+  padding-block: clamp(5.5rem, 10vw, 9rem);
+}
+
+.section--compact {
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+}
+
+.page-header {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 54rem;
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
+}
+
+.page-header__intro {
+  max-width: var(--content-width);
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, var(--space-3));
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-3);
+}
