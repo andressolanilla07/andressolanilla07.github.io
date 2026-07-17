@@ -126,6 +126,37 @@ function createStarTexture(textures) {
   return createCanvasTexture(canvas, textures);
 }
 
+function createGlintTexture(textures) {
+  const canvas = createCanvas(128, 128);
+  const context = canvas.getContext('2d');
+  const radial = context.createRadialGradient(64, 64, 0, 64, 64, 42);
+  radial.addColorStop(0, 'rgba(255,255,255,1)');
+  radial.addColorStop(0.06, 'rgba(235,248,255,0.96)');
+  radial.addColorStop(0.2, 'rgba(150,210,255,0.32)');
+  radial.addColorStop(1, 'rgba(60,140,220,0)');
+  context.fillStyle = radial;
+  context.fillRect(18, 18, 92, 92);
+
+  const horizontal = context.createLinearGradient(0, 0, 128, 0);
+  horizontal.addColorStop(0, 'rgba(160,215,255,0)');
+  horizontal.addColorStop(0.43, 'rgba(195,230,255,0.08)');
+  horizontal.addColorStop(0.5, 'rgba(255,255,255,0.7)');
+  horizontal.addColorStop(0.57, 'rgba(195,230,255,0.08)');
+  horizontal.addColorStop(1, 'rgba(160,215,255,0)');
+  context.fillStyle = horizontal;
+  context.fillRect(0, 62.5, 128, 3);
+
+  const vertical = context.createLinearGradient(0, 0, 0, 128);
+  vertical.addColorStop(0, 'rgba(160,215,255,0)');
+  vertical.addColorStop(0.43, 'rgba(195,230,255,0.08)');
+  vertical.addColorStop(0.5, 'rgba(255,255,255,0.72)');
+  vertical.addColorStop(0.57, 'rgba(195,230,255,0.08)');
+  vertical.addColorStop(1, 'rgba(160,215,255,0)');
+  context.fillStyle = vertical;
+  context.fillRect(62.5, 0, 3, 128);
+  return createCanvasTexture(canvas, textures);
+}
+
 function createRadialTexture(stops, textures, size = 256) {
   const canvas = createCanvas(size, size);
   const context = canvas.getContext('2d');
@@ -463,9 +494,13 @@ export function createBackground() {
       else if (colorChance < 0.96) colors.push(0.58, 0.8, 1);
       else if (colorChance < 0.99) colors.push(1, 0.85, 0.68);
       else colors.push(0.35, 0.9, 0.68);
-      sizes.push(sizeRange[0] + random() * (sizeRange[1] - sizeRange[0]));
+      const sizeChance = random();
+      const sizeSpan = sizeRange[1] - sizeRange[0];
+      if (sizeChance < 0.62) sizes.push(sizeRange[0] + random() * sizeSpan * 0.22);
+      else if (sizeChance < 0.95) sizes.push(sizeRange[0] + sizeSpan * (0.25 + random() * 0.4));
+      else sizes.push(sizeRange[0] + sizeSpan * (0.72 + random() * 0.28));
       phases.push(random() * TAU);
-      speeds.push(0.3 + random() * (depth > -2 ? 1.2 : 0.55));
+      speeds.push(region === 'lower' ? 0.08 + random() * 0.18 : 0.3 + random() * (depth > -2 ? 1.2 : 0.55));
     }
     const geometry = trackGeometry(new THREE.BufferGeometry());
     setPointAttributes(geometry, positions, colors, sizes, phases, speeds);
@@ -483,15 +518,10 @@ export function createBackground() {
   const midStars = createStarLayer(isMobile ? 260 : isTablet ? 470 : 720, -2, [0.85, 2.1], 0.68, 50);
   const nearStars = createStarLayer(isMobile ? 34 : 92, 0.3, [1.25, 3.1], 0.78, 90);
   const lowerStars = createStarLayer(isMobile ? 70 : isTablet ? 130 : 190, -1.4, [0.45, 1.05], 0.3, 49, 'lower');
+  const lowerDust = createStarLayer(isMobile ? 45 : isTablet ? 85 : 125, -1.6, [0.22, 0.58], 0.15, 48, 'lower');
 
   // A few near-star glints are sprites, never large blurred particles.
-  const glintTexture = createRadialTexture([
-    [0, 'rgba(255,255,255,1)'],
-    [0.04, 'rgba(235,248,255,0.95)'],
-    [0.15, 'rgba(165,215,255,0.36)'],
-    [0.42, 'rgba(80,160,230,0.06)'],
-    [1, 'rgba(20,80,150,0)'],
-  ], textures, 128);
+  const glintTexture = createGlintTexture(textures);
   const glints = [];
   const glintCount = isMobile ? 4 : 10;
   for (let i = 0; i < glintCount; i++) {
@@ -691,6 +721,44 @@ export function createBackground() {
   const galaxyPointCount = isMobile ? 3400 : isTablet ? 7600 : 10800;
   const galaxyPoints = createGalaxyPoints(galaxyPointCount);
 
+  function createGalaxyKnots(count) {
+    const positions = [];
+    const colors = [];
+    const sizes = [];
+    const phases = [];
+    const speeds = [];
+    for (let i = 0; i < count; i++) {
+      const arm = i % 4;
+      const radius = 0.12 + Math.pow(random(), 0.82) * 0.78;
+      const angle = arm * TAU / 4 + radius * 5.45 + (random() + random() - 1) * (0.035 + radius * 0.055);
+      positions.push(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.61, 0.045 + random() * 0.025);
+      const colorChance = random();
+      if (radius < 0.3 && colorChance < 0.36) colors.push(1, 0.85, 0.63);
+      else if (colorChance < 0.68) colors.push(0.9, 0.96, 1);
+      else if (colorChance < 0.94) colors.push(0.52, 0.82, 1);
+      else colors.push(0.3, 0.86, 0.9);
+      sizes.push(1.15 + random() * 1.25);
+      phases.push(random() * TAU);
+      speeds.push(0.12 + random() * 0.28);
+    }
+    const geometry = trackGeometry(new THREE.BufferGeometry());
+    setPointAttributes(geometry, positions, colors, sizes, phases, speeds);
+    const material = trackMaterial(createPointMaterial(textures, {
+      texture: starTexture,
+      opacity: 0.82,
+      blending: THREE.AdditiveBlending,
+    }));
+    animatedPointMaterials.push(material);
+    const points = new THREE.Points(geometry, material);
+    points.position.z = 0.052;
+    points.renderOrder = 35;
+    points.frustumCulled = false;
+    galaxyGroup.add(points);
+    return points;
+  }
+
+  const galaxyKnots = createGalaxyKnots(isMobile ? 55 : isTablet ? 120 : 190);
+
   // Fine dust around the galactic plane adds depth without reading as snow.
   const cosmicDustCount = isMobile ? 360 : 1050;
   const dustPositions = [];
@@ -751,12 +819,12 @@ export function createBackground() {
 
   // Intentional constellation patterns live in normalized edge-safe regions.
   const constellationPlacements = [
-    { nx: 0.035, ny: 0.15, width: 0.16, height: 0.09, phase: 0.4, drift: 3.4 },
-    { nx: 0.805, ny: 0.14, width: 0.15, height: 0.09, phase: 1.6, drift: 3.1 },
-    { nx: 0.035, ny: 0.4, width: 0.13, height: 0.16, phase: 2.7, drift: 4.2 },
-    { nx: 0.84, ny: 0.4, width: 0.12, height: 0.16, phase: 3.8, drift: 3.5 },
-    { nx: 0.055, ny: 0.75, width: 0.15, height: 0.11, phase: 4.9, drift: 3.8 },
-    { nx: 0.81, ny: 0.74, width: 0.14, height: 0.11, phase: 5.7, drift: 3.4 },
+    { nx: 0.035, ny: 0.15, width: 0.16, height: 0.09, phase: 0.4, drift: 3.4, rotation: -0.04 },
+    { nx: 0.805, ny: 0.14, width: 0.15, height: 0.09, phase: 1.6, drift: 3.1, rotation: 0.06 },
+    { nx: 0.035, ny: 0.4, width: 0.13, height: 0.16, phase: 2.7, drift: 4.2, rotation: -0.07 },
+    { nx: 0.84, ny: 0.4, width: 0.12, height: 0.16, phase: 3.8, drift: 3.5, rotation: 0.05 },
+    { nx: 0.055, ny: 0.75, width: 0.15, height: 0.11, phase: 4.9, drift: 3.8, rotation: 0.08 },
+    { nx: 0.81, ny: 0.74, width: 0.14, height: 0.11, phase: 5.7, drift: 3.4, rotation: -0.06 },
   ];
   const constellationGroups = [];
   const visibleConstellationCount = isMobile ? 4 : 6;
@@ -765,6 +833,7 @@ export function createBackground() {
     const placement = constellationPlacements[i];
     const group = new THREE.Group();
     group.position.z = -0.8;
+    group.rotation.z = placement.rotation;
     group.userData = { ...placement, baseX: 0, baseY: 0 };
 
     const pointPositions = [];
@@ -775,13 +844,13 @@ export function createBackground() {
     for (let j = 0; j < template.points.length; j++) {
       pointPositions.push(template.points[j][0], 1 - template.points[j][1], 0);
       pointColors.push(0.78, 0.9, 1);
-      pointSizes.push(j === 0 || j === Math.floor(template.points.length / 2) ? 3.2 : 2.1);
+      pointSizes.push(j === 0 || j === Math.floor(template.points.length / 2) ? 3.65 : 1.95);
       pointPhases.push(random() * TAU);
       pointSpeeds.push(0.25 + random() * 0.35);
     }
     const pointGeometry = trackGeometry(new THREE.BufferGeometry());
     setPointAttributes(pointGeometry, pointPositions, pointColors, pointSizes, pointPhases, pointSpeeds);
-    const pointMaterial = trackMaterial(createPointMaterial(textures, { texture: starTexture, opacity: 0.82 }));
+    const pointMaterial = trackMaterial(createPointMaterial(textures, { texture: starTexture, opacity: 0.9 }));
     animatedPointMaterials.push(pointMaterial);
     const points = new THREE.Points(pointGeometry, pointMaterial);
     points.renderOrder = 61;
@@ -798,7 +867,7 @@ export function createBackground() {
     const lineMaterial = trackMaterial(new THREE.LineBasicMaterial({
       color: 0xaed7ff,
       transparent: true,
-      opacity: 0.2 + random() * 0.07,
+      opacity: 0.17 + random() * 0.08,
       depthTest: false,
       depthWrite: false,
       blending: THREE.NormalBlending,
@@ -812,7 +881,7 @@ export function createBackground() {
   }
 
   // Real lit planet meshes with procedural color and bump textures.
-  scene.add(new THREE.HemisphereLight(0x8dcaff, 0x02050a, 0.24));
+  scene.add(new THREE.HemisphereLight(0x8dcaff, 0x02050a, 0.3));
   const keyLight = new THREE.DirectionalLight(0xdaf2ff, 2.65);
   keyLight.position.set(-4, 4, 6);
   scene.add(keyLight);
@@ -848,7 +917,7 @@ export function createBackground() {
       metalness: 0.03,
       color: i === 0 ? 0xa7bac4 : 0x9aafa9,
       emissive: i === 0 ? 0x071522 : 0x061713,
-      emissiveIntensity: 0.08,
+      emissiveIntensity: 0.11,
     }));
     const sphere = new THREE.Mesh(geometry, material);
     sphere.renderOrder = 72;
@@ -857,7 +926,7 @@ export function createBackground() {
     const atmosphereMaterial = trackMaterial(new THREE.ShaderMaterial({
       uniforms: {
         uColor: { value: new THREE.Color(i === 0 ? 0x83c5d9 : 0x73b8a8) },
-        uOpacity: { value: 0.22 },
+        uOpacity: { value: 0.26 },
       },
       vertexShader: `
         varying vec3 vNormal;
@@ -896,7 +965,7 @@ export function createBackground() {
       const ringMaterial = trackMaterial(new THREE.MeshBasicMaterial({
         color: 0x9abac0,
         transparent: true,
-        opacity: 0.13,
+        opacity: 0.15,
         side: THREE.DoubleSide,
         depthWrite: false,
         toneMapped: false,
@@ -1000,6 +1069,7 @@ export function createBackground() {
     dustPlane.scale.copy(galaxyPlane.scale);
     galaxyHalo.scale.set(galaxyRadiusWorld * 2.55, galaxyRadiusWorld * 1.48, 1);
     galaxyPoints.scale.setScalar(galaxyRadiusWorld);
+    galaxyKnots.scale.setScalar(galaxyRadiusWorld);
     cosmicDust.scale.setScalar(galaxyRadiusWorld);
     for (let i = 0; i < coreSprites.length; i++) {
       const size = galaxyRadiusWorld * coreSprites[i].userData.baseSize;
@@ -1014,6 +1084,8 @@ export function createBackground() {
     nearStars.scale.set(nearView.width, nearView.height, 1);
     const lowerView = viewSizeAtZ(lowerStars.position.z);
     lowerStars.scale.set(lowerView.width, lowerView.height, 1);
+    const lowerDustView = viewSizeAtZ(lowerDust.position.z);
+    lowerDust.scale.set(lowerDustView.width, lowerDustView.height, 1);
 
     for (let i = 0; i < nebulae.length; i++) {
       const nebula = nebulae[i];
@@ -1118,6 +1190,11 @@ export function createBackground() {
     galaxyGroup.rotation.z = elapsed * TAU / GALAXY_ROTATION_SECONDS;
     galaxyGroup.rotation.x = Math.sin(elapsed * 0.025) * 0.008;
     galaxyMaterial.opacity = 0.89 + Math.sin(elapsed * 0.22) * 0.018;
+    cosmicDust.rotation.z = -elapsed * TAU / 430;
+    cosmicDust.position.x = Math.sin(elapsed * 0.031) * 0.008;
+    cosmicDust.position.y = Math.cos(elapsed * 0.026) * 0.005;
+    lowerDust.position.x = Math.sin(elapsed * 0.022) * 0.006;
+    lowerDust.position.y = Math.cos(elapsed * 0.018) * 0.004;
     for (let i = 0; i < coreSprites.length; i++) {
       const pulse = 1 + Math.sin(elapsed * (0.19 + i * 0.035) + i) * (0.012 + i * 0.003);
       const size = galaxyRadiusWorld * coreSprites[i].userData.baseSize * pulse;
@@ -1133,8 +1210,8 @@ export function createBackground() {
     for (let i = 0; i < nebulae.length; i++) {
       const nebula = nebulae[i];
       const definition = nebula.userData;
-      nebula.position.x = definition.baseX + Math.sin(elapsed * 0.018 + definition.phase) * 0.045;
-      nebula.position.y = definition.baseY + Math.cos(elapsed * 0.014 + definition.phase) * 0.028;
+      nebula.position.x = definition.baseX + Math.sin(elapsed * 0.022 + definition.phase) * 0.055;
+      nebula.position.y = definition.baseY + Math.cos(elapsed * 0.018 + definition.phase) * 0.035;
     }
 
     for (let i = 0; i < constellationGroups.length; i++) {
@@ -1152,12 +1229,12 @@ export function createBackground() {
       const orbit = elapsed * TAU / definition.period + definition.phase;
       planet.group.position.x = planet.group.userData.baseX + Math.cos(orbit) * definition.orbitX * worldPerPixel;
       planet.group.position.y = planet.group.userData.baseY + Math.sin(orbit) * definition.orbitY * worldPerPixel;
-      planet.sphere.rotation.y += deltaTime * (0.045 + i * 0.012);
+      planet.sphere.rotation.y += deltaTime * (0.065 + i * 0.014);
       planet.sphere.rotation.x = 0.08 + Math.sin(elapsed * 0.027 + i) * 0.025;
     }
 
     for (let i = 0; i < glints.length; i++) {
-      glints[i].material.opacity = 0.46 + Math.sin(elapsed * 0.62 + glints[i].userData.phase) * 0.13;
+      glints[i].material.opacity = 0.48 + Math.sin(elapsed * 0.38 + glints[i].userData.phase) * 0.12;
     }
 
     updateShootingStar(deltaTime);
