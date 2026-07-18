@@ -1,4 +1,37 @@
-const MOBILE_QUERY = "(max-width: 56rem)";
+const MOBILE_QUERY = "(max-width: 47.99rem)";
+
+function getMenuToggle(header, navigation) {
+  const existingToggle = header?.querySelector(".nav-toggle");
+
+  if (existingToggle) return existingToggle;
+
+  const toggle = document.createElement("button");
+  toggle.className = "nav-toggle";
+  toggle.type = "button";
+  toggle.innerHTML = "<span>Menú</span>";
+  navigation.before(toggle);
+  return toggle;
+}
+
+function getMenuBackdrop() {
+  const existingBackdrop = document.querySelector(".nav-backdrop");
+
+  if (existingBackdrop) return existingBackdrop;
+
+  const backdrop = document.createElement("button");
+  backdrop.className = "nav-backdrop";
+  backdrop.type = "button";
+  backdrop.hidden = true;
+  backdrop.tabIndex = -1;
+  backdrop.setAttribute("aria-label", "Cerrar menú");
+  document.body.append(backdrop);
+  return backdrop;
+}
+
+function setScrollLock(isLocked) {
+  document.documentElement.classList.toggle("is-menu-open", isLocked);
+  document.body.classList.toggle("is-menu-open", isLocked);
+}
 
 function addMenuIcon(toggle) {
   const label = toggle.querySelector("span");
@@ -13,21 +46,29 @@ function addMenuIcon(toggle) {
 }
 
 export function initMobileNavigation() {
-  const toggle = document.querySelector(".nav-toggle");
-  const navigation = document.querySelector("#site-navigation");
   const header = document.querySelector(".site-header");
+  const navigation = header?.querySelector(".site-nav");
 
-  if (!toggle || !navigation) return;
+  if (!header || !navigation) return;
+
+  if (!navigation.id) navigation.id = "site-navigation";
+
+  const toggle = getMenuToggle(header, navigation);
+  const backdrop = getMenuBackdrop();
 
   const mobileQuery = window.matchMedia(MOBILE_QUERY);
   let isOpen = false;
+
+  toggle.setAttribute("aria-controls", navigation.id);
 
   const closeMenu = ({ restoreFocus = false } = {}) => {
     isOpen = false;
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Abrir menú");
     navigation.hidden = mobileQuery.matches;
+    backdrop.hidden = true;
     header?.classList.remove("is-menu-open");
+    setScrollLock(false);
 
     if (restoreFocus && mobileQuery.matches) toggle.focus();
   };
@@ -35,9 +76,11 @@ export function initMobileNavigation() {
   const openMenu = () => {
     isOpen = true;
     navigation.hidden = false;
+    backdrop.hidden = false;
     toggle.setAttribute("aria-expanded", "true");
     toggle.setAttribute("aria-label", "Cerrar menú");
     header?.classList.add("is-menu-open");
+    setScrollLock(true);
   };
 
   const syncViewport = () => {
@@ -47,7 +90,9 @@ export function initMobileNavigation() {
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Abrir menú");
     navigation.hidden = mobileQuery.matches;
+    backdrop.hidden = true;
     header?.classList.remove("is-menu-open");
+    setScrollLock(false);
   };
 
   addMenuIcon(toggle);
@@ -59,8 +104,12 @@ export function initMobileNavigation() {
   });
 
   navigation.addEventListener("click", (event) => {
-    if (event.target.closest("a[href]") && mobileQuery.matches) closeMenu();
+    if (event.target.closest("a[href]") && mobileQuery.matches) {
+      closeMenu({ restoreFocus: true });
+    }
   });
+
+  backdrop.addEventListener("click", () => closeMenu({ restoreFocus: true }));
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && isOpen) closeMenu({ restoreFocus: true });

@@ -1,16 +1,24 @@
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   background: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-sans);
 }
 
 body {
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--color-background);
   font-size: clamp(1rem, 1.2vw, 1.15rem);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+
+html.is-menu-open,
+body.is-menu-open {
+  overflow: hidden;
 }
 
 h1,

@@ -42,3 +42,17 @@
   display: grid;
   gap: var(--space-3);
 }
+
+@media (max-width: 47.99rem) {
+  .page-main {
+    padding-top: calc(4.25rem + env(safe-area-inset-top));
+  }
+
+  .page-main > .container:first-child {
+    padding-top: var(--space-4);
+  }
+
+  .hero.section--compact {
+    padding-block: var(--space-4) 2.5rem;
+  }
+}
