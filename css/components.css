@@ -290,6 +290,18 @@
 .whatsapp-panel h2 { font-size: 1.6rem; }
 .whatsapp-panel .text-link { display: block; }
 .whatsapp-status:empty { display: none; }
+.technology-scene__image {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  background: var(--color-background);
+}
+.technology-scene__image img { display: block; width: 100%; height: auto; }
+.technology-scene p { max-width: var(--content-width); }
+.technology-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+.technology-logos { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 0.35rem; }
+.technology-logo { width: 2rem; height: 2rem; object-fit: contain; }
+.technology-group > ul { list-style: none; }
 body.is-menu-open .whatsapp-contact { visibility: hidden; }
 .site-footer { padding-bottom: 6.5rem; }
 

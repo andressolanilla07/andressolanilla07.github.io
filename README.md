@@ -30,3 +30,9 @@ Portfolio v2.0 se propone desde `feature/portfolio-v2` hacia `main`; fusionar o 
 Pendientes: alcance, stack y enlaces públicos autorizados de FaithCore y Crespos; confirmar estado de titulación universitaria y finalización de la formación SENA; vigencia del CV; enlace de WhatsApp; imagen social autorizada antes de añadir `og:image`.
 
 El perfil, la formación, los idiomas y las fechas de experiencia se actualizaron a partir del CV incluido en el repositorio. “Materias terminadas” no se presenta como título obtenido. El CV no especifica el estado de finalización del programa SENA.
+
+## Recursos visuales
+
+Ilustración de dispositivos sin marcas generada con la herramienta integrada de imágenes; es conceptual, no una captura de FaithCore o Crespos. Se sirve en WebP de 640 y 1280 px con carga diferida.
+
+Logos SVG locales de [Devicon v2.16.0](https://github.com/devicons/devicon/tree/v2.16.0), con licencia conservada en `assets/icons/technologies/LICENSE.txt`. Se usan para identificar tecnologías, sin implicar patrocinio. Los logos pertenecen a sus respectivos titulares. No se cargan fuentes ni iconos desde un CDN.
