@@ -97,6 +97,7 @@ export function initMobileNavigation() {
 
   addMenuIcon(toggle);
   syncViewport();
+  header.classList.add("has-mobile-navigation");
 
   toggle.addEventListener("click", () => {
     if (isOpen) closeMenu({ restoreFocus: true });

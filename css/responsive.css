@@ -167,3 +167,10 @@
     width: 100%;
   }
 }
+
+@media (max-width: 47.99rem) {
+  .site-header:not(.has-mobile-navigation) { position: static; }
+  .site-header:not(.has-mobile-navigation) .site-header__inner { height: auto; flex-wrap: wrap; }
+  .site-header:not(.has-mobile-navigation) .site-nav { position: static; width: 100%; max-height: none; }
+  body:has(.site-header:not(.has-mobile-navigation)) .page-main { padding-top: 0; }
+}
