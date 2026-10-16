@@ -78,3 +78,8 @@ a {
 .skip-link:focus {
   transform: translateY(0);
 }
+
+/* Allow long contact details and project names to wrap at narrow widths. */
+h1, h2, h3, p, a, span { overflow-wrap: anywhere; }
+.grid > *, .site-footer__inner > * { min-width: 0; }
+[id] { scroll-margin-top: 6rem; }

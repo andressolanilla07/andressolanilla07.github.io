@@ -1,18 +1,30 @@
-# Portafolio minimal de Andrés Solanilla
+# Portafolio de Andrés Solanilla
 
-Sitio estático multipágina construido con HTML semántico, CSS moderno y JavaScript progresivo. El proyecto está preparado para funcionar sin proceso de compilación y con rutas relativas compatibles con GitHub Pages.
+Sitio estático multipágina con HTML, CSS y JavaScript sin compilación. Conserva el diseño minimalista y la navegación adaptable.
 
-## Estado
+Sitio público: https://andressolanilla07.github.io/
 
-Phase 1 establece la arquitectura, el contenido semántico, la navegación compartida, el footer y las bases CSS. El diseño visual final, las interacciones JavaScript y la revisión de calidad pertenecen a fases posteriores.
+## Desarrollo local
 
-## Ejecución local
+Usar Live Server o ejecutar `python -m http.server 8000` desde la raíz. Abrir http://localhost:8000 para cargar los módulos JavaScript mediante HTTP.
 
-Abra `index.html` mediante Live Server o cualquier servidor HTTP estático.
+`css/main.css` reúne los estilos y `js/main.js` carga las interacciones. Ya existen foto, favicon y CV en `assets/`; el autor debe revisar la vigencia del CV.
 
-## Contenido pendiente
+## Contacto
 
-- URL pública definitiva para canonical, Open Graph, `robots.txt` y `sitemap.xml`.
-- Correo, GitHub y LinkedIn definitivos.
-- Fechas, instituciones, certificaciones y detalles verificables de proyectos.
-- Fotografías, capturas de proyectos y CV final.
+- Email: solanilla07@gmail.com
+- WhatsApp: @andressolanilla07. Se muestra sin teléfono ni enlace porque no se pudo verificar el destino de esta cuenta.
+- LinkedIn: https://www.linkedin.com/in/andres-solanilla-dev
+- GitHub: https://github.com/andressolanilla07
+
+## Proyectos
+
+FaithCore y Crespos están en desarrollo. El autor estima aproximadamente un 70 % de avance en ambos al 16 de octubre de 2026. Es una estimación personal, no una medición verificada de funcionalidades. No hay demo ni repositorio público confirmado. No se atribuyen tecnologías ni implementaciones sin evidencia y no se publica código privado.
+
+## Verificación y revisión
+
+Revisar recursos y fragmentos locales, metadatos y JSON-LD. En navegador: anchos de 320, 375, 768 y 1440 px, teclado, menú con Escape y acceso sin JavaScript. Los contactos se repiten entre páginas: comprobar su consistencia cuando se modifiquen. No se añade una cadena de compilación ni despliegue.
+
+Portfolio v2.0 se propone desde `feature/portfolio-v2` hacia `main`; fusionar o publicar requiere aprobación explícita del autor.
+
+Pendientes: alcance, stack y enlaces públicos autorizados de FaithCore y Crespos; fechas, instituciones y credenciales marcadas como pendientes; vigencia del CV; enlace de WhatsApp; imagen social autorizada antes de añadir `og:image`.
