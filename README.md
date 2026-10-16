@@ -36,3 +36,5 @@ El perfil, la formación, los idiomas y las fechas de experiencia se actualizaro
 Ilustración de dispositivos sin marcas generada con la herramienta integrada de imágenes; es conceptual, no una captura de FaithCore o Crespos. Se sirve en WebP de 640 y 1280 px con carga diferida.
 
 Logos SVG locales de [Devicon v2.16.0](https://github.com/devicons/devicon/tree/v2.16.0), con licencia conservada en `assets/icons/technologies/LICENSE.txt`. Se usan para identificar tecnologías, sin implicar patrocinio. Los logos pertenecen a sus respectivos titulares. No se cargan fuentes ni iconos desde un CDN.
+
+La página de tecnologías incluye una segunda ilustración conceptual de dispositivos plateados, inspirada en el diseño industrial de un Mac, sin logos ni marcas. Se conserva la ilustración original del inicio.

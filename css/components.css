@@ -309,3 +309,5 @@ body.is-menu-open .whatsapp-contact { visibility: hidden; }
   .button, .nav-toggle, .site-nav__link, .contact-link[href], .text-link,
   .footer-nav a, .brand, .whatsapp-orb { transition: none; transform: none; }
 }
+
+.technology-studio { max-width: 56rem; margin-inline: auto; }
