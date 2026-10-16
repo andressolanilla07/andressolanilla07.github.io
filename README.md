@@ -27,4 +27,6 @@ Revisar recursos y fragmentos locales, metadatos y JSON-LD. En navegador: anchos
 
 Portfolio v2.0 se propone desde `feature/portfolio-v2` hacia `main`; fusionar o publicar requiere aprobación explícita del autor.
 
-Pendientes: alcance, stack y enlaces públicos autorizados de FaithCore y Crespos; fechas, instituciones y credenciales marcadas como pendientes; vigencia del CV; enlace de WhatsApp; imagen social autorizada antes de añadir `og:image`.
+Pendientes: alcance, stack y enlaces públicos autorizados de FaithCore y Crespos; confirmar estado de titulación universitaria y finalización de la formación SENA; vigencia del CV; enlace de WhatsApp; imagen social autorizada antes de añadir `og:image`.
+
+El perfil, la formación, los idiomas y las fechas de experiencia se actualizaron a partir del CV incluido en el repositorio. “Materias terminadas” no se presenta como título obtenido. El CV no especifica el estado de finalización del programa SENA.
